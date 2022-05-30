@@ -1,0 +1,2 @@
+tr -cs A-Za-z \n < test_data/gatsby.txt | tr A-Z a-z | sort | uniq -c | sort -rn | head -n 12
+exit

@@ -1,0 +1,373 @@
+#+TITLE: Multi-Process Word Count Tests
+#+TESTY: PREFIX="par_word_lengths"
+#+TESTY: TIMEOUT="10s"
+
+* No Input files
+Starts the par_word_lengths program with no additional command-line arguments
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths
+#+END_SRC sh
+
+
+* Empty Input File
+Count word lengths in a single, empty file
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/empty.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 0
+2-Character Words: 0
+3-Character Words: 0
+4-Character Words: 0
+5-Character Words: 0
+6-Character Words: 0
+7-Character Words: 0
+8-Character Words: 0
+9-Character Words: 0
+10-Character Words: 0
+11-Character Words: 0
+12-Character Words: 0
+13-Character Words: 0
+14-Character Words: 0
+15-Character Words: 0
+16-Character Words: 0
+17-Character Words: 0
+18-Character Words: 0
+19-Character Words: 0
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* One-Word Input File
+Count word lengths in just one file containing a single word
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/one_word.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 0
+2-Character Words: 0
+3-Character Words: 0
+4-Character Words: 1
+5-Character Words: 0
+6-Character Words: 0
+7-Character Words: 0
+8-Character Words: 0
+9-Character Words: 0
+10-Character Words: 0
+11-Character Words: 0
+12-Character Words: 0
+13-Character Words: 0
+14-Character Words: 0
+15-Character Words: 0
+16-Character Words: 0
+17-Character Words: 0
+18-Character Words: 0
+19-Character Words: 0
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Non-Existent File
+Attempt to count word lengths in a non-existent file
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths not_a_file.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 0
+2-Character Words: 0
+3-Character Words: 0
+4-Character Words: 0
+5-Character Words: 0
+6-Character Words: 0
+7-Character Words: 0
+8-Character Words: 0
+9-Character Words: 0
+10-Character Words: 0
+11-Character Words: 0
+12-Character Words: 0
+13-Character Words: 0
+14-Character Words: 0
+15-Character Words: 0
+16-Character Words: 0
+17-Character Words: 0
+18-Character Words: 0
+19-Character Words: 0
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Multi-Word Input File
+Count word lengths in just one file containing several words
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/multi_word.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 1
+2-Character Words: 1
+3-Character Words: 2
+4-Character Words: 1
+5-Character Words: 1
+6-Character Words: 1
+7-Character Words: 1
+8-Character Words: 2
+9-Character Words: 2
+10-Character Words: 0
+11-Character Words: 0
+12-Character Words: 0
+13-Character Words: 0
+14-Character Words: 0
+15-Character Words: 0
+16-Character Words: 0
+17-Character Words: 0
+18-Character Words: 0
+19-Character Words: 0
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Two Single-Word Input Files
+Count word lengths in two files, each containing one word
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/one_word.txt test_files/one_word_2.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 0
+2-Character Words: 0
+3-Character Words: 0
+4-Character Words: 1
+5-Character Words: 0
+6-Character Words: 1
+7-Character Words: 0
+8-Character Words: 0
+9-Character Words: 0
+10-Character Words: 0
+11-Character Words: 0
+12-Character Words: 0
+13-Character Words: 0
+14-Character Words: 0
+15-Character Words: 0
+16-Character Words: 0
+17-Character Words: 0
+18-Character Words: 0
+19-Character Words: 0
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Two Multi-Word Input Files
+Count word lengths in two files, each containing multiple words
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/multi_word.txt test_files/multi_word_2.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 1
+2-Character Words: 2
+3-Character Words: 3
+4-Character Words: 1
+5-Character Words: 4
+6-Character Words: 1
+7-Character Words: 3
+8-Character Words: 2
+9-Character Words: 2
+10-Character Words: 0
+11-Character Words: 0
+12-Character Words: 0
+13-Character Words: 0
+14-Character Words: 0
+15-Character Words: 0
+16-Character Words: 0
+17-Character Words: 0
+18-Character Words: 0
+19-Character Words: 0
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Several Multi-Word Input Files
+Count word lengths in several files, each containing multiple words on one line
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/single_line.txt test_files/single_line_2.txt test_files/single_line_3.txt test_files/single_line_4.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 1
+2-Character Words: 2
+3-Character Words: 1
+4-Character Words: 0
+5-Character Words: 1
+6-Character Words: 2
+7-Character Words: 0
+8-Character Words: 1
+9-Character Words: 2
+10-Character Words: 2
+11-Character Words: 3
+12-Character Words: 1
+13-Character Words: 1
+14-Character Words: 0
+15-Character Words: 2
+16-Character Words: 3
+17-Character Words: 2
+18-Character Words: 2
+19-Character Words: 3
+20-Character Words: 3
+21-Character Words: 5
+22-Character Words: 1
+23-Character Words: 1
+24-Character Words: 1
+25-Character Words: 0
+#+END_SRC sh
+
+
+* One Multi-Line Input File
+Count word lengths in a file with words on multiple lines
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/multi_line.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 2
+2-Character Words: 2
+3-Character Words: 3
+4-Character Words: 1
+5-Character Words: 3
+6-Character Words: 2
+7-Character Words: 2
+8-Character Words: 0
+9-Character Words: 2
+10-Character Words: 3
+11-Character Words: 1
+12-Character Words: 1
+13-Character Words: 2
+14-Character Words: 2
+15-Character Words: 1
+16-Character Words: 0
+17-Character Words: 1
+18-Character Words: 1
+19-Character Words: 1
+20-Character Words: 0
+21-Character Words: 0
+22-Character Words: 0
+23-Character Words: 0
+24-Character Words: 0
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Several Multi-Line Input Files
+Count word lengths in several files, each with words on multiple lines
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/multi_line.txt test_files/multi_line_2.txt test_files/multi_line_3.txt test_files/multi_line_4.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 7
+2-Character Words: 6
+3-Character Words: 7
+4-Character Words: 11
+5-Character Words: 6
+6-Character Words: 6
+7-Character Words: 6
+8-Character Words: 1
+9-Character Words: 5
+10-Character Words: 10
+11-Character Words: 4
+12-Character Words: 5
+13-Character Words: 8
+14-Character Words: 5
+15-Character Words: 4
+16-Character Words: 2
+17-Character Words: 3
+18-Character Words: 6
+19-Character Words: 1
+20-Character Words: 4
+21-Character Words: 5
+22-Character Words: 0
+23-Character Words: 3
+24-Character Words: 5
+25-Character Words: 0
+#+END_SRC sh
+
+
+* Single Large Input Files
+Count word lengths in one large text file
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/large.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 43
+2-Character Words: 35
+3-Character Words: 39
+4-Character Words: 52
+5-Character Words: 48
+6-Character Words: 38
+7-Character Words: 34
+8-Character Words: 32
+9-Character Words: 41
+10-Character Words: 41
+11-Character Words: 47
+12-Character Words: 39
+13-Character Words: 38
+14-Character Words: 32
+15-Character Words: 39
+16-Character Words: 38
+17-Character Words: 34
+18-Character Words: 39
+19-Character Words: 42
+20-Character Words: 38
+21-Character Words: 45
+22-Character Words: 40
+23-Character Words: 37
+24-Character Words: 38
+25-Character Words: 51
+#+END_SRC sh
+
+
+* Several Large Input Files
+Count word lengths in several large text files
+
+#+BEGIN_SRC sh
+>> ./par_word_lengths test_files/large.txt test_files/large_2.txt test_files/large_3.txt 2>&1 | grep -E '^[0-9]+-Character'
+1-Character Words: 124
+2-Character Words: 105
+3-Character Words: 112
+4-Character Words: 138
+5-Character Words: 146
+6-Character Words: 128
+7-Character Words: 110
+8-Character Words: 109
+9-Character Words: 104
+10-Character Words: 125
+11-Character Words: 135
+12-Character Words: 128
+13-Character Words: 119
+14-Character Words: 112
+15-Character Words: 110
+16-Character Words: 111
+17-Character Words: 117
+18-Character Words: 108
+19-Character Words: 119
+20-Character Words: 121
+21-Character Words: 131
+22-Character Words: 113
+23-Character Words: 113
+24-Character Words: 127
+25-Character Words: 135
+#+END_SRC sh

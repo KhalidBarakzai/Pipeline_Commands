@@ -1,0 +1,209 @@
+#+TITLE: swish Shell Pipeline Tests
+#+TESTY: PREFIX="swish"
+#+TESTY: TIMEOUT="10s"
+
+* Two-Element Pipeline Without Communication
+Runs a simple pipeline consisting of two commands that doesn't require any
+real communication between the two programs.
+
+#+BEGIN_SRC sh
+>> cat test_commands/1.txt | ./run_terminal_session | dos2unix
+@> echo hello | echo world
+world
+@> exit
+#+END_SRC
+
+
+* Two-Element Pipeline With Communication
+Runs a simple two-element pipeline consisting of two commands where output of
+the first command must be provided as input to second command.
+
+#+BEGIN_SRC sh
+>> cat test_commands/2.txt | ./run_terminal_session | dos2unix
+@> echo hello | cat
+hello
+@> exit
+#+END_SRC
+
+
+* Three-Element Pipeline
+Runs a pipeline consisting of three communicating programs.
+
+#+BEGIN_SRC sh
+>> cat test_commands/3.txt | ./run_terminal_session | dos2unix
+@> cat test_data/numbers.txt | sort -n | head -n 10
+3
+3
+7
+7
+7
+26
+34
+36
+38
+44
+@> exit
+#+END_SRC
+
+
+* Three-Element Pipeline With Input Redirection
+Runs a pipeline consisting of three programs. The first program has its input
+redirected from a file.
+
+#+BEGIN_SRC sh
+>> cat test_commands/4.txt | ./run_terminal_session | dos2unix
+@> cat < test_data/numbers.txt | sort -n | head -n 10
+3
+3
+7
+7
+7
+26
+34
+36
+38
+44
+@> exit
+#+END_SRC
+
+
+* Three-Element Pipeline With Output Redirection
+Runs a pipeline consisting of three programs. The last program has its output
+redirected to a file.
+
+#+BEGIN_SRC sh
+>> cat test_commands/5.txt | ./run_terminal_session | dos2unix
+@> cat  test_data/numbers.txt | sort -n | head -n 10 > out.txt
+@> exit
+>> cat out.txt
+3
+3
+7
+7
+7
+26
+34
+36
+38
+44
+>> rm -f out.txt
+#+END_SRC
+
+
+* Three-Element Pipeline With Input and Output Redirection
+Runs a pipeline consisting of three programs. The first program has its input
+redirected from a file and the last program has its output redirected to a file.
+
+#+BEGIN_SRC sh
+>> cat test_commands/6.txt | ./run_terminal_session | dos2unix
+@> cat  < test_data/numbers.txt | sort -n | head -n 10 > out.txt
+@> exit
+>> cat out.txt
+3
+3
+7
+7
+7
+26
+34
+36
+38
+44
+>> rm -f out.txt
+#+END_SRC
+
+
+* Gatsby Most Common Words
+Counts the most frequently appearing words in the text of The Great Gatsby.
+
+#+BEGIN_SRC sh
+>> cat test_commands/7.txt | ./run_terminal_session | dos2unix
+@> cat test_data/gatsby.txt | tr -cs A-Za-z \n | tr A-Z a-z | sort | uniq -c | sort -rn | head -n 12
+   2594 the
+   1635 and
+   1471 a
+   1393 i
+   1242 of
+   1213 to
+    867 in
+    857 he
+    770 was
+    658 that
+    621 it
+    597 you
+@> exit
+#+END_SRC
+
+
+* Gatsby Most Common Words With Input Redirected
+Counts the most frequently appearing words in the text of The Great Gatsby. The
+novel is read from a file redirected as input to the first command.
+
+#+BEGIN_SRC sh
+>> cat test_commands/8.txt | ./run_terminal_session | dos2unix
+@> tr -cs A-Za-z \n < test_data/gatsby.txt | tr A-Z a-z | sort | uniq -c | sort -rn | head -n 12
+   2594 the
+   1635 and
+   1471 a
+   1393 i
+   1242 of
+   1213 to
+    867 in
+    857 he
+    770 was
+    658 that
+    621 it
+    597 you
+@> exit
+#+END_SRC
+
+
+* Gatsby Most Common Words With Output Redirected
+Counts the most frequently appearing words in the text of The Great Gatsby. The
+output results are redirected to a file.
+
+#+BEGIN_SRC sh
+>> cat test_commands/9.txt | ./run_terminal_session | dos2unix
+@> cat test_data/gatsby.txt | tr -cs A-Za-z \n | tr A-Z a-z | sort | uniq -c | sort -rn | head -n 12 > out.txt
+@> exit
+>> cat out.txt
+   2594 the
+   1635 and
+   1471 a
+   1393 i
+   1242 of
+   1213 to
+    867 in
+    857 he
+    770 was
+    658 that
+    621 it
+    597 you
+>> rm -f out.txt
+#+END_SRC
+
+
+* Gatsby Most Common Words With Input and Output Redirected
+Counts the most frequently appearing words in the text of The Great Gatsby. The
+novel is read from a file redirected as input to the first command and the
+output results are redirected to a file.
+
+#+BEGIN_SRC sh
+>> cat test_commands/10.txt | ./run_terminal_session | dos2unix
+@> tr -cs A-Za-z \n < test_data/gatsby.txt | tr A-Z a-z | sort | uniq -c | sort -rn | head -n 12 > out.txt
+@> exit
+>> cat out.txt
+   2594 the
+   1635 and
+   1471 a
+   1393 i
+   1242 of
+   1213 to
+    867 in
+    857 he
+    770 was
+    658 that
+    621 it
+    597 you
+>> rm -f out.txt
+#+END_SRC
