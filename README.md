@@ -1,7 +1,5 @@
 # pipeline_commands
 
-Introduction
-
 This program will explore the use of pipes for inter-process communication.
 
 Part 1: Demonstrates a simple system for processing several input files in parallel, by using one process to read and process each of the files. This kind of approach, in contrast to a sequential approach in which each file is read and processed one after another, is becoming increasingly crucial to achieving acceptable performance on modern hardware systems. 
