@@ -1,4 +1,4 @@
-# pipeline_commands
+# Pipeline_Commands
 
 This program explores the use of pipes for inter-process communication.
 
