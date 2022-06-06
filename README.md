@@ -6,7 +6,7 @@ Part 1: Demonstrates a simple system for processing several input files in paral
 
 Part 2: Is an extension of the swish_shell to execute program pipelines. This allows one to execute a sequence of programs in which each program consumes input from its predecessor and sends output to its successor. This was one of the key contributions of the original Unix operating system: the ability to compose small, simple tools to achieve a larger goal. This contribution was made possible thanks to the use of pipes in combination with the traditional fork()/dup2()/exec() combination utilized in swish_shell.
 
-This project will focus on a few important systems programming topics:
+This program will focus on a few important systems programming topics:
 
     Text file input and parsing
     Creating pipes with the pipe() system call
